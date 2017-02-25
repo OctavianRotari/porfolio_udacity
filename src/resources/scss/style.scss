@@ -14,3 +14,27 @@ header {
     }
   }
 }
+
+//hero-img
+
+.hero-img {
+  img {
+    width: 100%;
+  }
+}
+
+//projects
+
+.projects {
+  a {
+    display: block;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .project {
+    box-shadow: 3px 3px 3px 3px #aaa;
+  }
+}
