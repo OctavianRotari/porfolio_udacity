@@ -1,4 +1,13 @@
 @media only screen and (max-width: 991px){
+  header {
+    h1 {
+      font-size: 2em;
+    }
+    h2 {
+      font-size: 1.5em;
+    }
+  }
+
   .hero-img {
     img {
       width: calc(100% - 30px);
@@ -6,9 +15,13 @@
   }
 
   .projects {
+    h3 {
+      font-size: 2em;
+    }
+
     .project {
       h4 {
-        font-size: 2em;
+        font-size: 1.5em;
       }
 
       a {

@@ -33,6 +33,9 @@ var containerSize = [
   {
     heroImage: [ 750, 1500 ],
     projectImage: [ 250, 500 ]
+  }, {
+    heroImage: [],
+    projectImage: [ 740, 1480 ]
   }
 ];
 
