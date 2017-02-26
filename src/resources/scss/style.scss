@@ -1,3 +1,6 @@
+@import url(http://weloveiconfonts.com/api/?family=brandico);
+$font-lato: 'Lato', sans-serif;
+
 //Default style
 * {
   box-sizing: border-box;
@@ -7,11 +10,24 @@
 
 //header
 header {
+  font-family: $font-lato;
+}
+
+header {
   .logo{
     svg{
       width: 5em;
       margin-top: 20px;
     }
+  }
+
+  h1{
+    font-size: 3em;
+    font-weight: 300;
+  }
+
+  h2 {
+    font-weight: 400;
   }
 }
 
@@ -20,21 +36,48 @@ header {
 .hero-img {
   img {
     width: 100%;
+    border-top: 2px solid #aaa;
+    padding-top: 3em;
   }
+
 }
 
 //projects
 
 .projects {
-  a {
-    display: block;
-  }
-
-  img {
-    width: 100%;
+  h3 {
+    font-size: 3em;
+    font-family: $font-lato;
+    margin: 1em 0 1em 0;
+    color: #7d97ad;
   }
 
   .project {
-    box-shadow: 3px 3px 3px 3px #aaa;
+    h4{
+      font-family: $font-lato;
+      font-weight: 400;
+      font-size: 2.5em;
+      margin: 1em 0 1em 0;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    /* brandico */
+    [class*="brandico-"]:before {
+      font-family: 'brandico', sans-serif;
+      font-size: 1.5em;
+      padding-right: 0.5em;
+    }
+  }
+  .project {
+    padding-bottom: 6em;
   }
 }
