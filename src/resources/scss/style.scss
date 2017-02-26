@@ -1,16 +1,17 @@
-@import url(http://weloveiconfonts.com/api/?family=brandico);
-$font-lato: 'Lato', sans-serif;
+@import url(http://weloveiconfonts.com/api/?family=zocial);
 
-//Default style
+$font-lato: 'Lato', sans-serif;
+$dark-blue: #2d3c49;
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-//header
 header {
   font-family: $font-lato;
+  color: $dark-blue;
 }
 
 header {
@@ -31,8 +32,6 @@ header {
   }
 }
 
-//hero-img
-
 .hero-img {
   img {
     width: 100%;
@@ -42,14 +41,18 @@ header {
 
 }
 
-//projects
-
 .projects {
   h3 {
     font-size: 3em;
     font-family: $font-lato;
-    margin: 1em 0 1em 0;
+    font-weight: 300;
+    margin: 1em 0 0.4em 0;
     color: #7d97ad;
+  }
+
+  .project {
+    padding-bottom: 6em;
+    color: $dark-blue;
   }
 
   .project {
@@ -57,7 +60,7 @@ header {
       font-family: $font-lato;
       font-weight: 400;
       font-size: 2.5em;
-      margin: 1em 0 1em 0;
+      margin: 1em 0 0.4em 0;
     }
 
     a {
@@ -70,14 +73,10 @@ header {
       width: 100%;
     }
 
-    /* brandico */
-    [class*="brandico-"]:before {
-      font-family: 'brandico', sans-serif;
+    [class*="zocial-"]:before {
+      font-family: 'zocial', sans-serif;
       font-size: 1.5em;
       padding-right: 0.5em;
     }
-  }
-  .project {
-    padding-bottom: 6em;
   }
 }

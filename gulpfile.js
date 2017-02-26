@@ -5,42 +5,58 @@ var cleanCss = require('gulp-clean-css');
 var server = require('gulp-server-livereload');
 var concat = require('gulp-concat');
 var clean = require('gulp-clean');
-var imageMin = require('gulp-imagemin');
 var imageResize = require('gulp-image-resize');
+var cssImport = require('gulp-cssimport');
 // var debug = require('gulp-debug');
+var importOptions = { style: 'src/resources/scss/style.scss' };
 
 gulp.task('styles', function () {
-  gulp.src('src/**/*.{css,scss}')
+  gulp.src([ 'src/vendors/css/*.css', 'src/resources/scss/style.scss', 'src/resources/scss/media_queries.scss' ])
+    .pipe(cssImport(importOptions))
     .pipe(sass().on('error', sass.logError))
     .pipe(cleanCss({ compatibility: 'ie8' }))
     .pipe(concat('style.css'))
     .pipe(gulp.dest('dist/css/'));
 });
 
-gulp.task('imageMin', function () {
-  gulp.src('src/resources/img/*')
-    .pipe(imageMin())
-    .pipe(gulp.dest('src/resources/img/'));
-});
-
 var resizeImageTaskNames = [];
 
-[ 1984, 992, 330, 660 ].forEach(function (size, index) {
-  var imageSize = 'imageResize_' + size;
-  gulp.task(imageSize, function () {
-    var heroImage = 'src/resources/img/code.jpeg';
-    var projectImages = [ 'src/resources/img/*.{jpeg,jpg}', '!' + heroImage ];
-    var images;
-    if (index < 2) {
+var containerSize = [
+  {
+    heroImage: [ 2340, 1170 ],
+    projectImage: [ 390 , 780 ]
+  },
+  {
+    heroImage: [ 970, 1940 ],
+    projectImage: [ 323.33, 646.66 ]
+  },
+  {
+    heroImage: [ 750, 1500 ],
+    projectImage: [ 250, 500 ]
+  }
+];
+
+containerSize.forEach(function (deviceSizes) {
+  var heroImage = 'src/resources/img/code.jpeg';
+  var projectImages = [ 'src/resources/img/*.{jpeg,jpg}', '!' + heroImage ];
+  var images;
+  var imageSize;
+  deviceSizes.heroImage.forEach(function (size) {
+    imageSize = 'imageResize' + size;
+    gulp.task(imageSize, function () {
       images = heroImage;
       imageResizeGulp (size, images);
-    }
-    else {
+    });
+    resizeImageTaskNames.push(imageSize);
+  });
+  deviceSizes.projectImage.forEach(function (size) {
+    imageSize = 'imageResize' + size;
+    gulp.task(imageSize, function () {
       images = projectImages;
       imageResizeGulp (size, images);
-    }
+    });
+    resizeImageTaskNames.push(imageSize);
   });
-  resizeImageTaskNames.push(imageSize);
 });
 
 function imageResizeGulp(size, images) {
@@ -67,7 +83,7 @@ gulp.task('watch', function () {
   gulp.watch([ 'src/resources/scss/*.scss', 'src/vendors/css/*.css' ], [ 'styles' ]);
 });
 
-gulp.task('server', ['watch'], function () {
+gulp.task('server', [ 'styles' ], function () {
   var stream = gulp.src('./')
     .pipe(server({
       livereload: true,
@@ -77,4 +93,4 @@ gulp.task('server', ['watch'], function () {
   return stream;
 });
 
-gulp.task('default', [ 'cleanImg', 'imageMin', 'imageResize', 'styles', 'watch', 'server' ]);
+gulp.task('default', [ 'cleanImg', 'imageResize', 'styles', 'watch', 'server' ]);
